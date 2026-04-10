@@ -1,0 +1,18 @@
+services:
+  newshub:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: newshub
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+    volumes:
+      - newshub-data:/app/data
+      - newshub-output:/app/output
+
+volumes:
+  newshub-data:
+  newshub-output:
